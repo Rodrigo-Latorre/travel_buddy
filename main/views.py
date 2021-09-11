@@ -44,6 +44,7 @@ def add(request):
 
     this_trip = Travels.objects.create(destination=destino,starttrip=inicio,endtrip=termino,plan=plan,planner=owner)
     owner.other_travel.add(this_trip)
+    messages.success(request, "Tu viaje ha sido agendado")
     return redirect('/travels')
 
 @login_required
@@ -62,6 +63,7 @@ def join(request,id):
     owner = User.objects.get(id=user_id)
     trip = Travels.objects.get(id=id)
     owner.other_travel.add(trip)
+    messages.success(request, "Te uniste al viaje sin problemas")
     return redirect('/travels')
 
 @login_required
@@ -70,10 +72,12 @@ def cancel(request,id):
     owner = User.objects.get(id=user_id)
     trip = Travels.objects.get(id=id)
     owner.other_travel.remove(trip)
+    messages.warning(request, "Cancelaste tu participación en este viaje")
     return redirect('/travels')
 
 @login_required
 def destroy(request,id):
     trip = Travels.objects.get(id=id)
     trip.delete()
+    messages.error(request, "Eliminaste tu viaje :(")
     return redirect('/travels')
