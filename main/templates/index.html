@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block titulo %}TRAVELS{% endblock %}
+
+{% block contenido %}
+<h3>Bienvenid@: {{request.session.user.name}}</h3>
+<br>
+<h5>Tus planes de viaje</h5>
+<div class="row justify-content-center">
+  <div class="col">
+    <table class="table index">
+      <thead class="table-info">
+        <tr>
+          <th scope="col">Destino</th>
+          <th scope="col">Fecha Inicio Viaje</th>
+          <th scope="col">Fecha Termino Viaje</th>
+          <th scope="col">Plan</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody class="table-success">
+        {% for travel in noviajo %}
+          <tr>
+            <td><a href="/travels/destination/{{travel.id}}">{{travel.destination}}</a></td>
+            <td>{{travel.starttrip}}</td>
+            <td>{{travel.endtrip}}</td>
+            <td>{{travel.plan}}</td>
+            <td>
+              <a href="/travels/destination/destroy/{{travel.id}}">Eliminar</a>
+            </td>
+          </tr>
+        {% endfor %}
+        {% for travel in mytravels %}
+          <tr>
+            <td><a href="/travels/destination/{{travel.id}}">{{travel.destination}}</a></td>
+            <td>{{travel.starttrip}}</td>
+            <td>{{travel.endtrip}}</td>
+            <td>{{travel.plan}}</td>
+            <td>
+              <a href="/travels/destination/destroy/{{travel.id}}">Eliminar</a>
+              <a href="/travels/destination/cancel/{{travel.id}}">Cancelar</a>
+            </td>
+          </tr>
+        {% endfor %}
+        {% for travel in ontravels %}
+          <tr>
+            <td><a href="/travels/destination/{{travel.id}}">{{travel.destination}}</a></td>
+            <td>{{travel.starttrip}}</td>
+            <td>{{travel.endtrip}}</td>
+            <td>{{travel.plan}}</td>
+            <td>
+              <a href="/travels/destination/cancel/{{travel.id}}">Cancelar</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+<br>
+<h5>Planes de otros usuarios</h5>
+<div class="row justify-content-center">
+  <div class="col">
+    <table class="table index">
+      <thead class="table-info">
+        <tr>
+          <th scope="col">Destino</th>
+          <th scope="col">Fecha Inicio Viaje</th>
+          <th scope="col">Fecha Termino Viaje</th>
+          <th scope="col">Plan</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody class="table-success">
+        {% for travel in others %}
+          <tr>
+            <td><a href="/travels/destination/{{travel.id}}">{{travel.destination}}</a></td>
+            <td>{{travel.starttrip}}</td>
+            <td>{{travel.endtrip}}</td>
+            <td>{{travel.plan}}</td>
+            <td>
+              <a href="/travels/destination/join/{{travel.id}}">Unirse</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block libreria %}
+  $(document).ready(function(){});
+  $("#tplan").removeClass("disabled")
+  $("#tplan").addClass("active")
+{% endblock %}

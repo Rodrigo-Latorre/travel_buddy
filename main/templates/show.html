@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block titulo %}DESTINATION{% endblock %}
+
+{% block contenido %}
+<h3>Bienvenid@: {{request.session.user.name}}</h3>
+<br>
+<div class="container">
+  <div class="row mb-4">
+    <div class="col">
+    <h2 class="mb-2 d-inline-block">{{trip.destination}}</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <p>Planeado por
+        <span class="ps-2">: </span>{{trip.planner.name}}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <p>Descripción
+        <span class="ps-3">: </span>
+        {{trip.plan}}
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <p>Inicio Viaje
+        <span class="ps-4">: </span>
+        {{trip.starttrip}}
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <p>Término Viaje
+        <span class="ps-2">: </span>
+        {{trip.endtrip}}
+      </p>
+    </div>
+  </div>
+  <div class="row my-4">
+    <div class="col">
+    <h3>Otros usuarios unidos a este viaje:</h3>
+    <ul>
+      {% for travel in joining %}
+        <li>{{travel.name}}</li>
+      {% endfor %}
+    </ul>
+    </div>
+  </div>
+
+  <a href="/travels" class="btn btn-success">VOLVER</a>
+</div>
+
+{% endblock %}
+
+{% block libreria %}
+  $(document).ready(function(){});
+  $("#tplan").removeClass("active")
+  $("#tplan").addClass("disabled")
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block titulo %}ADD A TRAVEL{% endblock %}
+
+{% block contenido %}
+<h3>Bienvenid@: {{request.session.user.name}}</h3>
+<br>
+<form action='/travels/add' method='POST'>
+  {% csrf_token %}
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-4"></div>
+      <div class="col-6">
+        <h2 class="mb-2 text-center d-inline-block">Agregar un Viaje</h2>
+      </div>
+    </div>
+    <br>
+    <div class="row justify-content-center mb-4">
+      <div class="col-4"></div>
+      <div class="col-8">
+        <label for="">Destino</label>
+        <input type="text-lg" name="destination" class="destination" required>
+      </div>
+    </div>
+    <div class="row justify-content-center mb-4">
+      <div class="col-4"></div>
+      <div class="col-8">
+        <label for="">Detalle plan</label>
+        <input type="text-lg" name="plantrip" class="plantrip" required>
+      </div>
+    </div>
+    <div class="row justify-content-center mb-4">
+      <div class="col-4"></div>
+      <div class="col-8">
+        <label for="">Inicio Viaje</label>
+        <input type="date" name="starttrip" required>
+      </div>
+    </div>
+    <div class="row justify-content-center mb-4">
+      <div class="col-4"></div>
+      <div class="col-8">
+        <label for="">Termino Viaje</label>
+        <input type="date" name="endtrip" required>
+      </div>
+    </div>
+    <div class="row justify-content-center mt-3 mb-4">
+      <div class="col-2">
+        <button class="btn btn-success" type='submit'>Agregar</button>
+      </div>
+    </div>
+  </div>
+</form>
+
+{% endblock %}
+
+{% block libreria %}
+  $(document).ready(function(){});
+  $("#tplan").removeClass("active")
+  $("#tplan").addClass("disabled")
+{% endblock %}
